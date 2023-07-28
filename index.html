@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Membership Form</title>
+    <style>
+        form {
+            margin: 20px;
+        }
+
+        .result {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="userForm" onsubmit="event.preventDefault(); displayInfo();">
+        <label for="firstname">First Name:</label><br>
+        <input type="text" id="firstname" name="firstname"><br>
+        <label for="lastname">Last Name:</label><br>
+        <input type="text" id="lastname" name="lastname"><br>
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address"><br>
+        <label for="city">City:</label><br>
+        <input type="text" id="city" name="city"><br>
+        <label for="province">Province:</label><br>
+        <input type="text" id="province" name="province"><br>
+
+        <p>Membership:</p>
+        <input type="radio" id="premium" name="membership" value="Premium Membership" checked>
+        <label for="premium">Premium Membership</label><br>
+        <input type="radio" id="standard" name="membership" value="Standard Membership">
+        <label for="standard">Standard Membership</label><br>
+        <input type="radio" id="basic" name="membership" value="Basic Membership">
+        <label for="basic">Basic Membership</label><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Cancel">
+    </form>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        function displayInfo() {
+            var firstname = document.getElementById("firstname").value;
+            var lastname = document.getElementById("lastname").value;
+            var email = document.getElementById("email").value;
+            var address = document.getElementById("address").value;
+            var city = document.getElementById("city").value;
+            var province = document.getElementById("province").value;
+            var membership = document.querySelector('input[name="membership"]:checked').value;
+
+            var resultDiv = document.getElementById("result");
+
+            resultDiv.innerHTML = `
+        Full Name: ${firstname} ${lastname} <br>
+        Email: ${email} <br>
+        Address: ${address}, ${city}, ${province} <br>
+        Membership: ${membership}
+      `;
+        }
+    </script>
+</body>
+
+</html>

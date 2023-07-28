@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Excel Functions</title>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+
+        .dark-theme {
+            background-color: darkblue;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Excel Functions</h1>
+    <form id="excelForm">
+        Enter your numbers separated by spaces:
+        <input id="numbers" type="text" placeholder="23 67 98 90 56">
+        <br>
+        <input type="radio" name="excel" id="sum" checked>AutoSum<br>
+        <input type="radio" name="excel" id="avg">Average<br>
+        <input type="radio" name="excel" id="max">Maximum<br>
+        <input type="radio" name="excel" id="min">Minimum<br>
+        <button type="button" onclick="myExcelFuns()">Calculate</button>
+    </form>
+    <p id="result">Result will be printed here</p>
+    <button id="themeButton" onclick="changeTheme()">Switch to Dark Theme</button>
+
+    <script>
+        let darkTheme = false;
+
+        function myExcelFuns() {
+            let numberStr = document.getElementById("numbers").value.trim();
+            if (!numberStr) {
+                alert("Please enter some numbers");
+                return;
+            }
+
+            let numberArr = numberStr.split(' ');
+            let finalNumericArray = [];
+            for (let i = 0; i < numberArr.length; i++) {
+                if (!isNaN(numberArr[i]) && numberArr[i] != '') {
+                    finalNumericArray.push(Number(numberArr[i]));
+                }
+            }
+
+            let result;
+            if (document.getElementById("sum").checked) {
+                result = finalNumericArray.reduce((a, b) => a + b, 0);
+            } else if (document.getElementById("avg").checked) {
+                result = finalNumericArray.reduce((a, b) => a + b, 0) / finalNumericArray.length;
+            } else if (document.getElementById("max").checked) {
+                result = Math.max(...finalNumericArray);
+            } else {
+                result = Math.min(...finalNumericArray);
+            }
+
+            document.getElementById("result").innerText = "Result: " + result;
+        }
+
+        function changeTheme() {
+            darkTheme = !darkTheme;
+            document.body.className = darkTheme ? 'dark-theme' : '';
+            document.getElementById('themeButton').innerText = darkTheme ? 'Switch to Light Theme' : 'Switch to Dark Theme';
+        }
+    </script>
+</body>
+
+</html>
